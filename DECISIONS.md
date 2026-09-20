@@ -1,7 +1,5 @@
 # DECISIONS
 
-Audit trail for the AI Resume Screening project. Each [PN] entry records a decision made during Phase N. Entries are append-only; superseded decisions are corrected at the bottom, never edited in place.
-
 _Last updated: 2026-09-20_
 
 ## Phase 1 — Dataset Reconnaissance
@@ -116,6 +114,15 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P10e] Skill Coverage = matched_required / total_required from score_breakdown.
 [P10e] JD Similarity = round(similarity * 100, 1) + "%".
 [P10e] Zero changes to src/, tests/, evaluation/, pipeline behavior.
+
+## Phase 10f — Verdict Edge-Case Fix
+[P10f] Fixed tier promotion when total_required == 0: similarity-only tiers (High/Moderate/Low textual overlap) with css verdict-strong/partial/weak; no skill mention in short/reason.
+[P10f] Fixed single-candidate (N==1) promotion: tier now derived from skill_ratio only, ignoring relative.
+[P10f] _verdict() now takes n_candidates; _augment_result() takes n_candidates and produces skill_coverage_display as "No required skills specified for this role" when T==0.
+[P10f] Why-this-result bullets: Branch 1 shows only similarity bullet plus "No required skills were specified for this role."; Branch 2/3 unchanged except no relative reference.
+[P10f] Routes store n_candidates (int) in session alongside max_score; display fields still computed in route, not stored.
+[P10f] Templates reworded zero-required empty states to "No required skills to match against" instead of "None".
+[P10f] Zero changes to src/, tests/, evaluation/, pipeline behavior.
 
 ## Phase 11 — Testing
 [P11] NOT RECORDED — decisions from this phase were not captured in real time. Backfill by inspecting outputs/results/ and git log if needed.
