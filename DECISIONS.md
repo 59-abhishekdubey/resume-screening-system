@@ -51,3 +51,22 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P8] Dev-only dep: reportlab (fixture generation only — not imported in src/)
 [P8] pdf_parser NOT wired into pipeline.py — Phase 9 owns orchestration
 [P8] Empty-text extraction returns "" (never raises) except FileNotFoundError
+
+
+
+
+
+
+## Phase 9 — End-to-End Pipeline
+[P9] pipeline.py exposes: screen_resumes, screen_from_pdf_folder, save_screening_report
+[P9] Flow: clean_text → tfidf_similarity → score_candidate → sort → build_candidate_result
+[P9] score_candidate is the SOLE entry point for skill extraction + gap — no duplication
+[P9] Result dict has exactly 8 keys: rank, candidate_id, overall_score, matched_skills,
+     missing_skills, similarity, score_breakdown, explanation
+[P9] build_candidate_result signature: (candidate_id, job_profile, similarity_score, score_dict)
+[P9] Tie-break rule: sort by (-final_score, candidate_id) for determinism
+[P9] CSV-vs-PDF parity verified: identical rankings, max score delta 0.0022,
+     skill-diff count 0, bit-identical on re-run (sha256 match)
+[P9] Repo not git-initialized — file-modification checks done via timestamps + SHA256
+[P9] Score formula is MULTIPLICATIVE: final = skill_component × similarity_component.
+     Top candidate currently scores 0.055 (5.5%). Display handling deferred to Phase 10.
