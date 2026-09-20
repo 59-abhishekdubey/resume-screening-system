@@ -27,6 +27,7 @@ GOOD_RELATIVE = 0.50
 PARTIAL_RELATIVE = 0.30
 HIGH_SIMILARITY = 0.50
 MODERATE_SIMILARITY = 0.30
+MISSING_DISPLAY_CAP = 4
 
 
 def _verdict(skill_ratio: float, relative: float, similarity: float, matched_count: int, total_required: int, missing_skills: list) -> dict:
@@ -91,6 +92,15 @@ def _augment_result(result: dict, max_overall_score: float) -> dict:
     copy["verdict_css"] = v["css_class"]
     copy["verdict_reason"] = v["reason"]
     copy["verdict_short"] = v["short"]
+    # Missing skills display line (Phase 10d) — capped, prefix "Missing: "
+    if not missing:
+        copy["verdict_missing_line"] = ""
+    elif len(missing) <= MISSING_DISPLAY_CAP:
+        copy["verdict_missing_line"] = "Missing: " + ", ".join(missing)
+    else:
+        shown = missing[:MISSING_DISPLAY_CAP]
+        remaining = len(missing) - MISSING_DISPLAY_CAP
+        copy["verdict_missing_line"] = "Missing: " + ", ".join(shown) + f" +{remaining} more"
     return copy
 
 

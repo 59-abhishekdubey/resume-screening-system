@@ -89,3 +89,10 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P10c] Reasoning is deterministic template string — NO LLM.
 [P10c] Raw scores, similarity, 9-key breakdown all PRESERVED below verdict.
 [P10c] Zero changes to src/, tests/, evaluation/.
+
+## Phase 10d — Missing Skills in Results Table
+[P10d] Missing skills surfaced under Verdict cell (sub-line, not new column).
+[P10d] Display cap = MISSING_DISPLAY_CAP (4) — longer lists show "+N more".
+[P10d] Empty missing_skills renders no line (no "Missing: none" noise).
+[P10d] Zero changes to src/, tests/, evaluation/.
+[P10d] This is the final UI change — project ships after this.

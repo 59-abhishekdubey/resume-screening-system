@@ -39,7 +39,7 @@
         {% set rel = (r.overall_score / max_score * 100) if max_score > 0 else 0 %}
         <tr>
           <td>{{ r.rank }}</td>
-          <td><span class="{{ r.verdict_css }}">{{ r.verdict_tier }}</span><div class="verdict-sub">{{ r.verdict_short }}</div></td>
+          <td><span class="{{ r.verdict_css }}">{{ r.verdict_tier }}</span><div class="verdict-sub">{{ r.verdict_short }}</div>{% if r.verdict_missing_line %}<div class="verdict-missing">{{ r.verdict_missing_line }}</div>{% endif %}</td>
           <td><a href="{{ url_for('candidate', candidate_id=r.candidate_id) }}">{{ r.candidate_id }}</a></td>
           <td>
             <div class="bar-track"><div class="bar" style="width: {{ rel }}%"></div></div>

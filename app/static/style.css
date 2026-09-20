@@ -128,3 +128,4 @@ code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 0.8
 .verdict-weak-banner     { background: #fbeaea; border-left: 6px solid #b03a2e; padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
 .verdict-headline { font-size: 1.4em; font-weight: 700; margin-bottom: 6px; }
 .verdict-reason   { font-size: 1.0em; color: #333; }
+.verdict-missing { font-size: 0.82em; color: #7a1f16; margin-top: 4px; line-height: 1.35; }
