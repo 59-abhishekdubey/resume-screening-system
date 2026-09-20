@@ -30,53 +30,105 @@ MODERATE_SIMILARITY = 0.30
 MISSING_DISPLAY_CAP = 4
 
 
-def _verdict(skill_ratio: float, relative: float, similarity: float, matched_count: int, total_required: int, missing_skills: list) -> dict:
+def _verdict(skill_ratio: float, relative: float, similarity: float, matched_count: int, total_required: int, missing_skills: list, n_candidates: int) -> dict:
     """Compute human-readable verdict tier and deterministic reasoning."""
-    # Tier decision (first match wins)
-    if skill_ratio >= STRONG_SKILL_RATIO and relative >= STRONG_RELATIVE:
-        tier = "Strong Match"
-        css_class = "verdict-strong"
-        short = "Strong fit — most required skills present."
-    elif skill_ratio >= GOOD_SKILL_RATIO or relative >= GOOD_RELATIVE:
-        tier = "Good Match"
-        css_class = "verdict-good"
-        short = "Good fit — key skills present, some gaps."
-    elif skill_ratio >= PARTIAL_SKILL_RATIO or relative >= PARTIAL_RELATIVE:
-        tier = "Partial Match"
-        css_class = "verdict-partial"
-        short = "Partial fit — several required skills missing."
-    else:
-        tier = "Weak Match"
-        css_class = "verdict-weak"
-        short = "Weak fit — few required skills matched."
+    # Branch 1 — total_required == 0: similarity-only tier
+    if total_required == 0:
+        if similarity >= HIGH_SIMILARITY:
+            tier = "High textual overlap"
+            css_class = "verdict-strong"
+            short = "Resume has strong wording overlap with the JD."
+            sim_sentence = "High textual overlap with the job description."
+        elif similarity >= MODERATE_SIMILARITY:
+            tier = "Moderate textual overlap"
+            css_class = "verdict-partial"
+            short = "Resume has moderate wording overlap with the JD."
+            sim_sentence = "Moderate textual overlap with the job description."
+        else:
+            tier = "Low textual overlap"
+            css_class = "verdict-weak"
+            short = "Resume wording differs significantly from the JD."
+            sim_sentence = "Low textual overlap \u2014 resume wording differs from the job description."
+        reason = f"No required skills were specified for this role. {sim_sentence}"
+        return {"tier": tier, "css_class": css_class, "reason": reason, "short": short}
 
-    # Reasoning sentence (deterministic template — no LLM)
+    # Branch 2 — single candidate (and total_required > 0): skill_ratio only
+    if n_candidates == 1:
+        if skill_ratio >= STRONG_SKILL_RATIO:
+            tier = "Strong skill overlap"
+            css_class = "verdict-strong"
+            short = "Most required skills present."
+        elif skill_ratio >= GOOD_SKILL_RATIO:
+            tier = "Good skill overlap"
+            css_class = "verdict-good"
+            short = "Most key skills present, some gaps."
+        elif skill_ratio >= PARTIAL_SKILL_RATIO:
+            tier = "Partial skill overlap"
+            css_class = "verdict-partial"
+            short = "Several required skills missing."
+        else:
+            tier = "Limited skill overlap"
+            css_class = "verdict-weak"
+            short = "Few required skills matched."
+        parts = []
+        parts.append(f"Found {matched_count} of {total_required} required skills.")
+        if missing_skills:
+            parts.append(f"Missing: {', '.join(sorted(missing_skills))}.")
+        if similarity >= HIGH_SIMILARITY:
+            parts.append("High textual overlap with the job description.")
+        elif similarity >= MODERATE_SIMILARITY:
+            parts.append("Moderate textual overlap with the job description.")
+        else:
+            parts.append("Low textual overlap \u2014 resume wording differs from the job description.")
+        reason = " ".join(parts)
+        return {"tier": tier, "css_class": css_class, "reason": reason, "short": short}
+
+    # Branch 3 — normal (total_required > 0 AND n_candidates >= 2): keep [P10c] logic verbatim
+    if skill_ratio >= STRONG_SKILL_RATIO and relative >= STRONG_RELATIVE:
+        tier = "Strong skill overlap"
+        css_class = "verdict-strong"
+        short = "Most required skills present."
+    elif skill_ratio >= GOOD_SKILL_RATIO or relative >= GOOD_RELATIVE:
+        tier = "Good skill overlap"
+        css_class = "verdict-good"
+        short = "Most key skills present, some gaps."
+    elif skill_ratio >= PARTIAL_SKILL_RATIO or relative >= PARTIAL_RELATIVE:
+        tier = "Partial skill overlap"
+        css_class = "verdict-partial"
+        short = "Several required skills missing."
+    else:
+        tier = "Limited skill overlap"
+        css_class = "verdict-weak"
+        short = "Few required skills matched."
+
     parts = []
-    parts.append(f"Matches {matched_count} of {total_required} required skills.")
+    parts.append(f"Found {matched_count} of {total_required} required skills.")
     if missing_skills:
         parts.append(f"Missing: {', '.join(sorted(missing_skills))}.")
     if similarity >= HIGH_SIMILARITY:
-        parts.append("High overlap with the job description.")
+        parts.append("High textual overlap with the job description.")
     elif similarity >= MODERATE_SIMILARITY:
-        parts.append("Moderate overlap with the job description.")
+        parts.append("Moderate textual overlap with the job description.")
     else:
-        parts.append("Low textual overlap with the job description — resume wording differs.")
+        parts.append("Low textual overlap \u2014 resume wording differs from the job description.")
     reason = " ".join(parts)
 
     return {"tier": tier, "css_class": css_class, "reason": reason, "short": short}
 
 
-def _augment_result(result: dict, max_overall_score: float) -> dict:
+def _augment_result(result: dict, max_overall_score: float, n_candidates: int = 0) -> dict:
     """Return a COPY of result plus verdict keys without mutating original."""
     copy = dict(result)
-    # copy nested structures shallow to avoid mutating original lists
-    # skill_ratio uses score_breakdown for authoritative counts
     bd = result.get("score_breakdown", {})
-    matched_required_list = bd.get("matched_required", result.get("matched_skills", []))
-    if isinstance(matched_required_list, list):
-        matched_count = len(matched_required_list)
+    # Handle both list and count forms for matched_required per locked decisions
+    matched_required_val = bd.get("matched_required", result.get("matched_skills", []))
+    if isinstance(matched_required_val, list):
+        matched_count = len(matched_required_val)
     else:
-        matched_count = len(result.get("matched_skills", []))
+        try:
+            matched_count = int(matched_required_val)
+        except Exception:
+            matched_count = len(result.get("matched_skills", []))
     total_required = bd.get("total_required", 0)
     if not isinstance(total_required, int):
         try:
@@ -87,7 +139,7 @@ def _augment_result(result: dict, max_overall_score: float) -> dict:
     relative = (result.get("overall_score", 0.0) / max_overall_score) if max_overall_score > 0 else 0.0
     similarity = result.get("similarity", 0.0)
     missing = result.get("missing_skills", [])
-    v = _verdict(skill_ratio, relative, similarity, matched_count, total_required, missing)
+    v = _verdict(skill_ratio, relative, similarity, matched_count, total_required, missing, n_candidates)
     copy["verdict_tier"] = v["tier"]
     copy["verdict_css"] = v["css_class"]
     copy["verdict_reason"] = v["reason"]
@@ -101,6 +153,48 @@ def _augment_result(result: dict, max_overall_score: float) -> dict:
         shown = missing[:MISSING_DISPLAY_CAP]
         remaining = len(missing) - MISSING_DISPLAY_CAP
         copy["verdict_missing_line"] = "Missing: " + ", ".join(shown) + f" +{remaining} more"
+    # Display-only fields for recruiter UI (Phase 10e/10f) — not stored in session
+    if total_required == 0:
+        copy["skill_coverage_display"] = "No required skills specified for this role"
+        copy["skill_coverage_pct"] = ""
+    else:
+        copy["skill_coverage_display"] = f"{matched_count} / {total_required} required skills"
+        pct = round(100 * matched_count / total_required, 1) if total_required else 0.0
+        copy["skill_coverage_pct"] = f"{pct:.1f}%"
+    copy["jd_similarity_display"] = f"{round(similarity * 100, 1):.1f}%"
+    # Why-this-result bullets (deterministic, no LLM) — per branch
+    if total_required == 0:
+        if similarity >= HIGH_SIMILARITY:
+            bullets = ["The resume has high textual overlap with the JD.", "No required skills were specified for this role."]
+        elif similarity >= MODERATE_SIMILARITY:
+            bullets = ["Resume-to-job textual similarity was moderate.", "No required skills were specified for this role."]
+        else:
+            bullets = ["Resume wording differs from the job description.", "No required skills were specified for this role."]
+    else:
+        bullets = []
+        bullets.append(f"Matched {matched_count} of {total_required} required skills.")
+        if missing:
+            bullets.append(f"Missing required skills: {', '.join(sorted(missing))}.")
+        if similarity >= HIGH_SIMILARITY:
+            bullets.append("The resume has high textual overlap with the JD.")
+        elif similarity >= MODERATE_SIMILARITY:
+            bullets.append("Resume-to-job textual similarity was moderate.")
+        else:
+            bullets.append("Resume-to-job textual similarity was low.")
+        matched_additional_val = bd.get("matched_additional", [])
+        if isinstance(matched_additional_val, list):
+            add_count = len(matched_additional_val)
+        else:
+            try:
+                add_count = int(matched_additional_val)
+            except Exception:
+                add_count = 0
+        if add_count > 0:
+            bullets.append(f"Also found {add_count} additional relevant skill(s) beyond the required set.")
+    # Ensure at least one bullet
+    if not bullets:
+        bullets = ["No required skills were specified for this role."]
+    copy["why_result_bullets"] = bullets
     return copy
 
 
@@ -204,7 +298,7 @@ def screen():
                 valid_pdfs.append(f)
 
         if invalid_names and not valid_pdfs and not resume_text:
-            flash(f"Non-PDF upload rejected: {', '.join(invalid_names)} — please upload .pdf files only.")
+            flash("Please upload a PDF file.")
             return render_template("index.html", roles=roles)
 
         if not valid_pdfs and not resume_text:
@@ -269,8 +363,9 @@ def screen():
 
     session["results"] = session_results
     session["job_role"] = job_profile.role
-    # Store max for relative display (computed again in /results but keep for convenience)
+    # Store max for internal verdict relative calculation (not for template display) and n_candidates for Branch 2
     session["max_score"] = max((x["overall_score"] for x in session_results), default=0.0)
+    session["n_candidates"] = len(session_results)
 
     return redirect(url_for("results"))
 
@@ -286,9 +381,10 @@ def results():
     max_score = session.get("max_score", 0.0)
     if max_score == 0:
         max_score = max((r["overall_score"] for r in results_data), default=0.0)
-    # Augment with verdict (computed in route, not stored in session)
-    augmented = [_augment_result(r, max_score) for r in results_data]
-    return render_template("result.html", results=augmented, job_role=job_role, max_score=max_score)
+    n_candidates = session.get("n_candidates", len(results_data))
+    # Augment with display fields (computed in route, not stored in session)
+    augmented = [_augment_result(r, max_score, n_candidates=n_candidates) for r in results_data]
+    return render_template("result.html", results=augmented, job_role=job_role)
 
 
 @app.route("/candidate/<candidate_id>", methods=["GET"])
@@ -304,11 +400,9 @@ def candidate(candidate_id):
     max_score = session.get("max_score", 0.0)
     if max_score == 0:
         max_score = max((r["overall_score"] for r in results_data), default=0.0)
-    # DISPLAY NORMALIZATION (Option C): relative = overall_score / max_overall_score per run
-    # Raw overall_score is preserved verbatim; relative is for visual bars only.
-    relative = (selected["overall_score"] / max_score) if max_score > 0 else 0.0
-    augmented = _augment_result(selected, max_score)
-    return render_template("candidate.html", candidate=augmented, max_score=max_score, relative=relative, job_role=session.get("job_role", "—"))
+    n_candidates = session.get("n_candidates", len(results_data))
+    augmented = _augment_result(selected, max_score, n_candidates=n_candidates)
+    return render_template("candidate.html", candidate=augmented, job_role=session.get("job_role", "—"))
 
 
 if __name__ == "__main__":

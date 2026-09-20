@@ -129,3 +129,26 @@ code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 0.8
 .verdict-headline { font-size: 1.4em; font-weight: 700; margin-bottom: 6px; }
 .verdict-reason   { font-size: 1.0em; color: #333; }
 .verdict-missing { font-size: 0.82em; color: #7a1f16; margin-top: 4px; line-height: 1.35; }
+/* Phase 10e — recruiter polish */
+.section-heading { font-size: 1.15rem; font-weight: 700; color: #1a1a1a; margin: 24px 0 10px; }
+.section-subheading { text-align: center; color: #888; font-size: 0.9rem; margin: 12px 0; font-weight: 600; letter-spacing: 0.08em; }
+.helper { font-size: 0.82rem; color: #666; margin: 4px 0 12px; }
+.badge { display: inline-block; padding: 4px 8px; border-radius: 12px; font-size: 0.82rem; margin: 3px 4px 3px 0; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+.badge-matched { background: #e8f6ec; color: #0a5a1e; border: 1px solid #b7dfc0; }
+.badge-missing { background: #fbeaea; color: #7a1f16; border: 1px solid #e8a0a0; }
+.match-summary-banner { padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
+.skill-coverage { font-size: 1.25rem; font-weight: 700; color: #1a1a1a; }
+.jd-similarity { font-size: 1.25rem; font-weight: 700; color: #1a1a1a; }
+.why-result { margin: 8px 0; padding-left: 18px; }
+.why-result li { margin: 6px 0; line-height: 1.45; }
+.footer-note { font-size: 0.82rem; color: #888; margin-top: 24px; border-top: 1px solid #eee; padding-top: 12px; }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+@media (max-width: 640px) {
+  table, thead, tbody, th, td, tr { display: block; }
+  thead { display: none; }
+  tr { border: 1px solid #e5e5e5; border-radius: 6px; margin-bottom: 12px; padding: 8px; }
+  td { border: none; padding: 6px 8px; }
+  td:before { content: attr(data-label); font-weight: 600; display: block; font-size: 0.8rem; color: #666; }
+  .two-col { grid-template-columns: 1fr; }
+  .metrics { grid-template-columns: 1fr; }
+}

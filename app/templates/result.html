@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Results — AI Candidate Screening</title>
+  <title>Screening Results — AI Candidate Screening</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div class="container">
   <header>
     <h1>Screening Results</h1>
-    <p class="caption">Role: <strong>{{ job_role }}</strong> — {{ results|length }} candidate(s)</p>
+    <p class="caption">{{ job_role }} — {{ results|length }} candidate(s) screened</p>
   </header>
 
   {% with messages = get_flashed_messages() %}
@@ -27,33 +27,62 @@
     <thead>
       <tr>
         <th>Rank</th>
-        <th>Verdict</th>
-        <th>Candidate ID</th>
-        <th>Relative Match</th>
-        <th>Raw Score</th>
-        <th>Similarity</th>
+        <th>Candidate</th>
+        <th>Match Summary</th>
+        <th>Skill Coverage</th>
+        <th>JD Similarity</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {% for r in results %}
-        {% set rel = (r.overall_score / max_score * 100) if max_score > 0 else 0 %}
         <tr>
           <td>{{ r.rank }}</td>
-          <td><span class="{{ r.verdict_css }}">{{ r.verdict_tier }}</span><div class="verdict-sub">{{ r.verdict_short }}</div>{% if r.verdict_missing_line %}<div class="verdict-missing">{{ r.verdict_missing_line }}</div>{% endif %}</td>
-          <td><a href="{{ url_for('candidate', candidate_id=r.candidate_id) }}">{{ r.candidate_id }}</a></td>
-          <td>
-            <div class="bar-track"><div class="bar" style="width: {{ rel }}%"></div></div>
-            <span class="bar-label">{{ '%.2f'|format(r.overall_score / max_score if max_score>0 else 0) }}</span>
-          </td>
-          <td>{{ '%.4f'|format(r.overall_score) }}</td>
-          <td>{{ '%.4f'|format(r.similarity) }}</td>
+          <td><a href="{{ url_for('candidate', candidate_id=r.candidate_id) }}" class="mono">{{ r.candidate_id }}</a></td>
+          <td><span class="{{ r.verdict_css }}">{{ r.verdict_tier }}</span><div class="verdict-sub">{{ r.verdict_short }}</div></td>
+          <td>{{ r.skill_coverage_display }}</td>
+          <td>{{ r.jd_similarity_display }}</td>
+          <td><a href="{{ url_for('candidate', candidate_id=r.candidate_id) }}">View &rarr;</a></td>
         </tr>
       {% endfor %}
     </tbody>
   </table>
-  <p class="caption">Max raw score: {{ '%.4f'|format(max_score) }} — bars = raw / max</p>
+
+  {% if results %}
+    {% set top = results[0] %}
+    <section>
+      <h3 class="section-heading">Top candidate — missing and matched skills</h3>
+      <div class="two-col">
+        <div>
+          <h4>Matched Skills</h4>
+          {% if top.matched_skills %}
+            {% for s in top.matched_skills %}<span class="badge badge-matched">{{ s }}</span>{% endfor %}
+          {% else %}
+            {% if top.skill_coverage_display == "No required skills specified for this role" %}
+              <span class="caption">No required skills to match against</span>
+            {% else %}
+              <span class="caption">None</span>
+            {% endif %}
+          {% endif %}
+        </div>
+        <div>
+          <h4>Missing Skills</h4>
+          {% if top.missing_skills %}
+            {% for s in top.missing_skills %}<span class="badge badge-missing">{{ s }}</span>{% endfor %}
+          {% else %}
+            {% if top.skill_coverage_display == "No required skills specified for this role" %}
+              <span class="caption">No required skills to match against</span>
+            {% else %}
+              <span class="caption">None — all required skills found</span>
+            {% endif %}
+          {% endif %}
+        </div>
+      </div>
+    </section>
+  {% endif %}
 
   <p><a href="{{ url_for('index') }}">Run another screening</a></p>
+  <p class="footer-note">Screening assistance: Results are based on extracted resume skills and job-description similarity and are intended to support recruiter review.</p>
 </div>
 </body>
 </html>

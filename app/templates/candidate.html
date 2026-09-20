@@ -9,8 +9,8 @@
 <body>
 <div class="container">
   <header>
-    <h1>Candidate {{ candidate.candidate_id }} — Rank #{{ candidate.rank }}</h1>
-    <p class="caption">Role: <strong>{{ job_role }}</strong></p>
+    <h1>Candidate Details</h1>
+    <p class="caption">Candidate {{ candidate.candidate_id }}</p>
   </header>
 
   <div class="{{ candidate.verdict_css }}-banner">
@@ -18,83 +18,60 @@
     <div class="verdict-reason">{{ candidate.verdict_reason }}</div>
   </div>
 
-  <section class="metrics">
-    <div class="metric">
-      <div class="metric-label">Relative Match</div>
-      <div class="metric-value">{{ '%.2f'|format(relative) }} <span class="metric-pct">({{ '%.0f'|format(relative*100) }}%)</span></div>
-      <div class="bar-track"><div class="bar" style="width: {{ relative*100 }}%"></div></div>
-      <p class="caption">raw / max — max {{ '%.4f'|format(max_score) }}</p>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Raw Score</div>
-      <div class="metric-value">{{ '%.4f'|format(candidate.overall_score) }}</div>
-      <p class="caption">verbatim overall_score (skill × similarity)</p>
-    </div>
-    <div class="metric">
-      <div class="metric-label">Similarity (raw)</div>
-      <div class="metric-value">{{ '%.4f'|format(candidate.similarity) }}</div>
-      <p class="caption">TF-IDF cosine 0–1, not %</p>
-    </div>
-  </section>
-
-  <section class="two-col">
-    <div>
-      <h3>Matched Skills ✓</h3>
-      {% if candidate.matched_skills %}
-        <ul class="matched">
-          {% for s in candidate.matched_skills %}
-            <li>✓ {{ s }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="caption">— none —</p>
-      {% endif %}
-    </div>
-    <div>
-      <h3>Missing Skills ✗</h3>
-      {% if candidate.missing_skills %}
-        <ul class="missing">
-          {% for s in candidate.missing_skills %}
-            <li>✗ {{ s }}</li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p class="caption">— none —</p>
-      {% endif %}
-    </div>
+  <section>
+    <h2 class="section-heading">Skill Coverage</h2>
+    <div class="skill-coverage">{{ candidate.skill_coverage_display }}</div>
+    {% if candidate.skill_coverage_pct %}
+      <div class="caption">({{ candidate.skill_coverage_pct }} of required skills matched)</div>
+    {% endif %}
   </section>
 
   <section>
-    <h3>Score Breakdown</h3>
-    <table>
-      <thead><tr><th>Key</th><th>Value</th></tr></thead>
-      <tbody>
-        {% for k, v in candidate.score_breakdown.items() %}
-          <tr>
-            <td><code>{{ k }}</code></td>
-            <td>
-              {% if v is iterable and v is not string %}
-                {{ v|join(', ') if v else '—' }}
-              {% else %}
-                {% if v is number %}
-                  {{ '%.4f'|format(v) if v is float else v }}
-                {% else %}
-                  {{ v }}
-                {% endif %}
-              {% endif %}
-            </td>
-          </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+    <h2 class="section-heading">JD Similarity</h2>
+    <div class="jd-similarity">{{ candidate.jd_similarity_display }}</div>
   </section>
 
   <section>
-    <h3>Why this candidate ranks here</h3>
+    <h2 class="section-heading">Matched Skills</h2>
+    {% if candidate.matched_skills %}
+      {% for s in candidate.matched_skills %}<span class="badge badge-matched">{{ s }}</span>{% endfor %}
+    {% else %}
+      {% if candidate.skill_coverage_display == "No required skills specified for this role" %}
+        <span class="caption">No required skills to match against</span>
+      {% else %}
+        <span class="caption">None</span>
+      {% endif %}
+    {% endif %}
+  </section>
+
+  <section>
+    <h2 class="section-heading">Missing Skills</h2>
+    {% if candidate.missing_skills %}
+      {% for s in candidate.missing_skills %}<span class="badge badge-missing">{{ s }}</span>{% endfor %}
+    {% else %}
+      {% if candidate.skill_coverage_display == "No required skills specified for this role" %}
+        <span class="caption">No required skills to match against</span>
+      {% else %}
+        <span class="caption">None — all required skills found</span>
+      {% endif %}
+    {% endif %}
+  </section>
+
+  <section>
+    <h2 class="section-heading">Why this result?</h2>
+    <ul class="why-result">
+      {% for b in candidate.why_result_bullets %}
+        <li>{{ b }}</li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section>
+    <h2 class="section-heading">System explanation</h2>
     <div class="callout">{{ candidate.explanation }}</div>
   </section>
 
-  <p><a href="{{ url_for('results') }}">← Back to results</a> | <a href="{{ url_for('index') }}">Run another screening</a></p>
+  <p><a href="{{ url_for('results') }}">&larr; Back to Results</a></p>
 </div>
 </body>
 </html>
