@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+
+# Regenerable fixture PDFs (run notebooks/phase8_generate_fixtures.py to rebuild)
+data/raw/pdfs/
+
+# Outputs (keep figures + results, ignore any scratch)
+outputs/screenshots/*.tmp
