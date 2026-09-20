@@ -1,0 +1,650 @@
+[
+  {
+    "rank": 1,
+    "candidate_id": "10089434",
+    "overall_score": 0.05506207399394422,
+    "matched_skills": [
+      "SQL"
+    ],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "Scikit-learn"
+    ],
+    "similarity": 0.40378854262225766,
+    "score_breakdown": {
+      "matched_required": [
+        "SQL"
+      ],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "Scikit-learn"
+      ],
+      "matched_additional": [
+        "Azure"
+      ],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.13636363636363635,
+      "similarity_component": 0.40378854262225766,
+      "final_score": 0.05506207399394422
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, Scikit-learn"
+  },
+  {
+    "rank": 2,
+    "candidate_id": "10041713",
+    "overall_score": 0.03056407430464458,
+    "matched_skills": [
+      "SQL"
+    ],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "Scikit-learn"
+    ],
+    "similarity": 0.33620481735109037,
+    "score_breakdown": {
+      "matched_required": [
+        "SQL"
+      ],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.09090909090909091,
+      "similarity_component": 0.33620481735109037,
+      "final_score": 0.03056407430464458
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, Scikit-learn"
+  },
+  {
+    "rank": 3,
+    "candidate_id": "10235211",
+    "overall_score": 0.017655180786304937,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.38841397729870863,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [
+        "Spark"
+      ],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.045454545454545456,
+      "similarity_component": 0.38841397729870863,
+      "final_score": 0.017655180786304937
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 4,
+    "candidate_id": "10001727",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.35241517992322946,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.35241517992322946,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 5,
+    "candidate_id": "10005171",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.29402005956447846,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.29402005956447846,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 6,
+    "candidate_id": "10030015",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.2871824987854682,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.2871824987854682,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 7,
+    "candidate_id": "10062724",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.4210449455419768,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.4210449455419768,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 8,
+    "candidate_id": "10070224",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.32769176221420493,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.32769176221420493,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 9,
+    "candidate_id": "10076271",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.31061216270307795,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.31061216270307795,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 10,
+    "candidate_id": "10100240",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.3714757178648647,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.3714757178648647,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 11,
+    "candidate_id": "10138632",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.4254480503431766,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.4254480503431766,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 12,
+    "candidate_id": "10149490",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.33266251414379977,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.33266251414379977,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 13,
+    "candidate_id": "10176013",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.4155743848725743,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.4155743848725743,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 14,
+    "candidate_id": "10176815",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.33562161115613964,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.33562161115613964,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 15,
+    "candidate_id": "10182582",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.3305444673840308,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.3305444673840308,
+      "final_score": 0.0
+    },
+    "explanation": "Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 16,
+    "candidate_id": "10186968",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.3626365930307651,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.3626365930307651,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 17,
+    "candidate_id": "10189110",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.38568144210245114,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.38568144210245114,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 18,
+    "candidate_id": "10219099",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.440857200464395,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.440857200464395,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 19,
+    "candidate_id": "10228751",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.3642637014447278,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.3642637014447278,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  },
+  {
+    "rank": 20,
+    "candidate_id": "10235429",
+    "overall_score": 0.0,
+    "matched_skills": [],
+    "missing_skills": [
+      "Docker",
+      "Kubernetes",
+      "Python",
+      "SQL",
+      "Scikit-learn"
+    ],
+    "similarity": 0.36544572334453085,
+    "score_breakdown": {
+      "matched_required": [],
+      "missing_required": [
+        "Docker",
+        "Kubernetes",
+        "Python",
+        "SQL",
+        "Scikit-learn"
+      ],
+      "matched_additional": [],
+      "total_required": 5,
+      "total_additional": 12,
+      "beta": 0.5,
+      "skill_component": 0.0,
+      "similarity_component": 0.36544572334453085,
+      "final_score": 0.0
+    },
+    "explanation": "Moderate similarity to job description; Missing: Docker, Kubernetes, Python, SQL, Scikit-learn"
+  }
+]

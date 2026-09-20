@@ -1,0 +1,4 @@
+pdfplumber>=0.11.0
+pdfminer.six>=20221105
+pypdfium2>=4.0.0
+# reportlab>=4.0.0  # dev-only, uncomment to run notebooks/phase8_generate_fixtures.py

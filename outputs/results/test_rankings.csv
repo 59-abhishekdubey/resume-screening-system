@@ -1,0 +1,4 @@
+rank,candidate_id,final_score,similarity_score,matched_required,missing_required,matched_additional,total_required,total_additional,beta,skill_component,similarity_component,final_score
+1,cand_1,0.12214106605084575,0.36642319815253727,Python,Java,,2,2,0.5,0.3333333333333333,0.36642319815253727,0.12214106605084575
+2,cand_2,0.07016963864671436,0.21050891594014307,Java,Python,,2,2,0.5,0.3333333333333333,0.21050891594014307,0.07016963864671436
+3,cand_3,0.0,0.1458365918972267,,"Java, Python",,2,2,0.5,0.0,0.1458365918972267,0.0

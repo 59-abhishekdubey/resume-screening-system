@@ -1,0 +1,9 @@
+skill,evaluations,precision,recall,f1
+Docker,1,1.0,1.0,1.0
+Git,5,0.8,0.8,0.8
+Java,9,0.7778,0.7778,0.7778
+JavaScript,8,0.75,0.75,0.75
+Python,10,0.8,0.8,0.8
+SQL,7,0.8571,0.8571,0.8571
+MICRO,,0.8,0.8,0.8
+MACRO,,0.8308,0.8308,0.8308

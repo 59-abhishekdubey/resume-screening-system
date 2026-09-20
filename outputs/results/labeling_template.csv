@@ -1,0 +1,6 @@
+pair_id,resume_id,job_role,relevant,notes
+sample_001,res_001,Machine Learning Engineer,1,High ML/content resume
+sample_002,res_002,Product Manager,0,Low experience section
+sample_003,res_003,Software Engineer,1,Strong technical skills
+sample_004,res_004,Product Manager,0,Limited product experience
+sample_005,res_005,Data Scientist,1,Strong research background

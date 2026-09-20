@@ -1,0 +1,36 @@
+[
+  {
+    "role": "Machine Learning Engineer",
+    "description": "We are seeking an experienced Machine Learning Engineer to design, develop, and deploy machine learning models at scale. The ideal candidate will have strong software engineering skills and experience with ML frameworks and cloud platforms. You will be responsible for building robust ML pipelines, optimizing model performance, and ensuring reliable deployment of AI solutions.\n\nRequirements:\n- Strong programming skills in Python and experience with ML libraries\n- Experience with scikit-learn, TensorFlow, or PyTorch for model development\n- Proficiency with data processing and analysis using pandas and NumPy\n- Experience building REST APIs and deploying models using Docker and Kubernetes\n- Knowledge of MLOps best practices and CI/CD pipelines\n- Bachelor's degree in Computer Science, Engineering, or related field\n\nPreferred Skills:\n- Experience with cloud platforms (AWS, GCP, or Azure)\n- Knowledge of natural language processing or computer vision techniques\n- Experience with big data technologies like Spark or Hadoop\n- Publications or open-source contributions in machine learning",
+    "required_skills": ["Python", "scikit-learn", "Docker", "Kubernetes", "SQL"],
+    "optional_skills": ["AWS", "TensorFlow", "Natural Language Processing", "Spark"]
+  },
+
+  {
+    "role": "UI/UX Designer",
+    "description": "Placeholder job description for UI/UX Designer role. This will be populated with a realistic job description in the next phase.\n\nThe designer will work on creating intuitive user interfaces and exceptional user experiences for our web and mobile applications.",
+    "required_skills": [],
+    "optional_skills": []
+  },
+
+  {
+    "role": "Data Scientist",
+    "description": "Placeholder job description for Data Scientist role. This will be populated with a realistic job description in the next phase.\n\nThe data scientist will analyze complex data sets to drive business insights and develop predictive models.",
+    "required_skills": [],
+    "optional_skills": []
+  },
+
+  {
+    "role": "DevOps Engineer",
+    "description": "Placeholder job description for DevOps Engineer role. This will be populated with a realistic job description in the next phase.\n\nThe DevOps engineer will build and maintain CI/CD pipelines, infrastructure, and deployment automation.",
+    "required_skills": [],
+    "optional_skills": []
+  },
+
+  {
+    "role": "Product Manager",
+    "description": "Placeholder job description for Product Manager role. This will be populated with a realistic job description in the next phase.\n\nThe product manager will define product strategy, prioritize features, and coordinate cross-functional teams.",
+    "required_skills": [],
+    "optional_skills": []
+  }
+]

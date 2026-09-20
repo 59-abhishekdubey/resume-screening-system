@@ -1,0 +1,11 @@
+resume_id,expected_skills,predicted_skills
+res_001,Python,Python
+res_001,Java,Java
+res_002,Python,JavaScript
+res_002,SQL,SQL
+res_003,Python,Python
+res_003,Git,Git
+res_004,Java,Python
+res_004,SQL,SQL
+res_005,Python,Python
+res_005,Docker,Docker
