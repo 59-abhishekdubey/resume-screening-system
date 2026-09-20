@@ -117,3 +117,14 @@ ul.missing li { color: #8a8a8a; padding: 2px 0; }
 }
 footer { margin-top: 24px; border-top: 1px solid #eee; padding-top: 12px; }
 code { background: #f1f1f1; padding: 1px 4px; border-radius: 3px; font-size: 0.88em; }
+.verdict-strong   { color: #0a7d2e; font-weight: 600; }
+.verdict-good     { color: #4a8a1e; font-weight: 600; }
+.verdict-partial  { color: #b8860b; font-weight: 600; }
+.verdict-weak     { color: #b03a2e; font-weight: 600; }
+.verdict-sub      { font-size: 0.85em; color: #666; margin-top: 2px; }
+.verdict-strong-banner   { background: #e8f6ec; border-left: 6px solid #0a7d2e; padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
+.verdict-good-banner     { background: #f0f8e8; border-left: 6px solid #4a8a1e; padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
+.verdict-partial-banner  { background: #fdf7e3; border-left: 6px solid #b8860b; padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
+.verdict-weak-banner     { background: #fbeaea; border-left: 6px solid #b03a2e; padding: 16px 20px; border-radius: 6px; margin: 16px 0; }
+.verdict-headline { font-size: 1.4em; font-weight: 700; margin-bottom: 6px; }
+.verdict-reason   { font-size: 1.0em; color: #333; }

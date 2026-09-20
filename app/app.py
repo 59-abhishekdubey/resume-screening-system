@@ -18,6 +18,82 @@ if str(ROOT) not in sys.path:
 from src.job_parser import parse_job  # noqa: E402
 from src.pipeline import screen_resumes, screen_from_pdf_folder  # noqa: E402
 
+# --- Verdict tunable constants (Phase 10c) ---
+STRONG_SKILL_RATIO = 0.70
+GOOD_SKILL_RATIO = 0.50
+PARTIAL_SKILL_RATIO = 0.30
+STRONG_RELATIVE = 0.70
+GOOD_RELATIVE = 0.50
+PARTIAL_RELATIVE = 0.30
+HIGH_SIMILARITY = 0.50
+MODERATE_SIMILARITY = 0.30
+
+
+def _verdict(skill_ratio: float, relative: float, similarity: float, matched_count: int, total_required: int, missing_skills: list) -> dict:
+    """Compute human-readable verdict tier and deterministic reasoning."""
+    # Tier decision (first match wins)
+    if skill_ratio >= STRONG_SKILL_RATIO and relative >= STRONG_RELATIVE:
+        tier = "Strong Match"
+        css_class = "verdict-strong"
+        short = "Strong fit — most required skills present."
+    elif skill_ratio >= GOOD_SKILL_RATIO or relative >= GOOD_RELATIVE:
+        tier = "Good Match"
+        css_class = "verdict-good"
+        short = "Good fit — key skills present, some gaps."
+    elif skill_ratio >= PARTIAL_SKILL_RATIO or relative >= PARTIAL_RELATIVE:
+        tier = "Partial Match"
+        css_class = "verdict-partial"
+        short = "Partial fit — several required skills missing."
+    else:
+        tier = "Weak Match"
+        css_class = "verdict-weak"
+        short = "Weak fit — few required skills matched."
+
+    # Reasoning sentence (deterministic template — no LLM)
+    parts = []
+    parts.append(f"Matches {matched_count} of {total_required} required skills.")
+    if missing_skills:
+        parts.append(f"Missing: {', '.join(sorted(missing_skills))}.")
+    if similarity >= HIGH_SIMILARITY:
+        parts.append("High overlap with the job description.")
+    elif similarity >= MODERATE_SIMILARITY:
+        parts.append("Moderate overlap with the job description.")
+    else:
+        parts.append("Low textual overlap with the job description — resume wording differs.")
+    reason = " ".join(parts)
+
+    return {"tier": tier, "css_class": css_class, "reason": reason, "short": short}
+
+
+def _augment_result(result: dict, max_overall_score: float) -> dict:
+    """Return a COPY of result plus verdict keys without mutating original."""
+    copy = dict(result)
+    # copy nested structures shallow to avoid mutating original lists
+    # skill_ratio uses score_breakdown for authoritative counts
+    bd = result.get("score_breakdown", {})
+    matched_required_list = bd.get("matched_required", result.get("matched_skills", []))
+    if isinstance(matched_required_list, list):
+        matched_count = len(matched_required_list)
+    else:
+        matched_count = len(result.get("matched_skills", []))
+    total_required = bd.get("total_required", 0)
+    if not isinstance(total_required, int):
+        try:
+            total_required = int(total_required)
+        except Exception:
+            total_required = 0
+    skill_ratio = (matched_count / total_required) if total_required > 0 else 0.0
+    relative = (result.get("overall_score", 0.0) / max_overall_score) if max_overall_score > 0 else 0.0
+    similarity = result.get("similarity", 0.0)
+    missing = result.get("missing_skills", [])
+    v = _verdict(skill_ratio, relative, similarity, matched_count, total_required, missing)
+    copy["verdict_tier"] = v["tier"]
+    copy["verdict_css"] = v["css_class"]
+    copy["verdict_reason"] = v["reason"]
+    copy["verdict_short"] = v["short"]
+    return copy
+
+
 app = Flask(__name__)
 app.secret_key = "dev-secret-key-change-in-prod-10b"
 
@@ -200,7 +276,9 @@ def results():
     max_score = session.get("max_score", 0.0)
     if max_score == 0:
         max_score = max((r["overall_score"] for r in results_data), default=0.0)
-    return render_template("result.html", results=results_data, job_role=job_role, max_score=max_score)
+    # Augment with verdict (computed in route, not stored in session)
+    augmented = [_augment_result(r, max_score) for r in results_data]
+    return render_template("result.html", results=augmented, job_role=job_role, max_score=max_score)
 
 
 @app.route("/candidate/<candidate_id>", methods=["GET"])
@@ -219,7 +297,8 @@ def candidate(candidate_id):
     # DISPLAY NORMALIZATION (Option C): relative = overall_score / max_overall_score per run
     # Raw overall_score is preserved verbatim; relative is for visual bars only.
     relative = (selected["overall_score"] / max_score) if max_score > 0 else 0.0
-    return render_template("candidate.html", candidate=selected, max_score=max_score, relative=relative, job_role=session.get("job_role", "—"))
+    augmented = _augment_result(selected, max_score)
+    return render_template("candidate.html", candidate=augmented, max_score=max_score, relative=relative, job_role=session.get("job_role", "—"))
 
 
 if __name__ == "__main__":

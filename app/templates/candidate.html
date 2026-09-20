@@ -13,6 +13,11 @@
     <p class="caption">Role: <strong>{{ job_role }}</strong></p>
   </header>
 
+  <div class="{{ candidate.verdict_css }}-banner">
+    <div class="verdict-headline">{{ candidate.verdict_tier }}</div>
+    <div class="verdict-reason">{{ candidate.verdict_reason }}</div>
+  </div>
+
   <section class="metrics">
     <div class="metric">
       <div class="metric-label">Relative Match</div>

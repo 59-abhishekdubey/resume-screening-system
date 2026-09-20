@@ -80,3 +80,12 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P10b] sample_jobs.json expanded to 11 roles (was: 5).
 [P10b] README sections 12, 18, 21, 22, 23 updated.
 [P10b] Zero changes to src/, tests/, evaluation/.
+
+## Phase 10c — Human-Readable Verdicts
+[P10c] Added verdict layer (Strong/Good/Partial/Weak Match) on Flask UI.
+[P10c] Primary signal: required-skill coverage ratio. Secondary: relative match.
+        Similarity shown as supporting evidence only.
+[P10c] Thresholds exposed as constants in app/app.py; tunable per batch.
+[P10c] Reasoning is deterministic template string — NO LLM.
+[P10c] Raw scores, similarity, 9-key breakdown all PRESERVED below verdict.
+[P10c] Zero changes to src/, tests/, evaluation/.
