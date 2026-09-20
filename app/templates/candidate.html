@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Candidate {{ candidate.candidate_id }} — AI Candidate Screening</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Candidate {{ candidate.candidate_id }} — Rank #{{ candidate.rank }}</h1>
+    <p class="caption">Role: <strong>{{ job_role }}</strong></p>
+  </header>
+
+  <section class="metrics">
+    <div class="metric">
+      <div class="metric-label">Relative Match</div>
+      <div class="metric-value">{{ '%.2f'|format(relative) }} <span class="metric-pct">({{ '%.0f'|format(relative*100) }}%)</span></div>
+      <div class="bar-track"><div class="bar" style="width: {{ relative*100 }}%"></div></div>
+      <p class="caption">raw / max — max {{ '%.4f'|format(max_score) }}</p>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Raw Score</div>
+      <div class="metric-value">{{ '%.4f'|format(candidate.overall_score) }}</div>
+      <p class="caption">verbatim overall_score (skill × similarity)</p>
+    </div>
+    <div class="metric">
+      <div class="metric-label">Similarity (raw)</div>
+      <div class="metric-value">{{ '%.4f'|format(candidate.similarity) }}</div>
+      <p class="caption">TF-IDF cosine 0–1, not %</p>
+    </div>
+  </section>
+
+  <section class="two-col">
+    <div>
+      <h3>Matched Skills ✓</h3>
+      {% if candidate.matched_skills %}
+        <ul class="matched">
+          {% for s in candidate.matched_skills %}
+            <li>✓ {{ s }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="caption">— none —</p>
+      {% endif %}
+    </div>
+    <div>
+      <h3>Missing Skills ✗</h3>
+      {% if candidate.missing_skills %}
+        <ul class="missing">
+          {% for s in candidate.missing_skills %}
+            <li>✗ {{ s }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p class="caption">— none —</p>
+      {% endif %}
+    </div>
+  </section>
+
+  <section>
+    <h3>Score Breakdown</h3>
+    <table>
+      <thead><tr><th>Key</th><th>Value</th></tr></thead>
+      <tbody>
+        {% for k, v in candidate.score_breakdown.items() %}
+          <tr>
+            <td><code>{{ k }}</code></td>
+            <td>
+              {% if v is iterable and v is not string %}
+                {{ v|join(', ') if v else '—' }}
+              {% else %}
+                {% if v is number %}
+                  {{ '%.4f'|format(v) if v is float else v }}
+                {% else %}
+                  {{ v }}
+                {% endif %}
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <h3>Why this candidate ranks here</h3>
+    <div class="callout">{{ candidate.explanation }}</div>
+  </section>
+
+  <p><a href="{{ url_for('results') }}">← Back to results</a> | <a href="{{ url_for('index') }}">Run another screening</a></p>
+</div>
+</body>
+</html>

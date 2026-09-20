@@ -124,7 +124,7 @@ final_score = skill_component × similarity_component  ← multiplicative per [P
 
 **0.055 max-score reality:** top candidate in `outputs/results/screening_report.json` is `10089434` with `overall_score 0.05506207399394422` (`skill 0.13636 × similarity 0.40378`), matching [P9] "Top candidate currently scores 0.055 (5.5%)" (`DECISIONS.md:72`). Product is low because only 1/5 required skills matched.
 
-**Phase 10 display (Option C per [P10], implemented in `app/app.py:148-158`):** raw preserved; dashboard shows `Relative Match = raw / max_overall_score` as progress bar + raw column. Caption: "max raw 0.0550 — relative bars = raw / max".
+**Phase 10b display (Option C per [P10], Flask `app/app.py` + `app/templates/result.html`):** raw preserved; Flask app shows `Relative Match = raw / max_overall_score` as horizontal bar + numeric label + raw column. Caption: "max raw 0.0550 — relative bars = raw / max".
 
 ## 13. Candidate Ranking
 
@@ -201,7 +201,7 @@ Available visuals (tracked figures, relative paths):
 
 ![Similarity distribution](outputs/figures/similarity_distribution.png)
 
-Dashboard (`app/app.py`) provides: 1) Job input (sample select vs paste), 2) Resume input (multi-PDF upload vs single paste), 3) Ranked table with Relative Match bars (Option C) + Raw + Similarity, 4) Candidate detail (matched/missing, 9-key breakdown, explanation). Capture these to `outputs/screenshots/` for portfolio.
+Flask app (`app/app.py`, `app/templates/*.html`, `app/static/style.css`) provides routes: `GET /` (job select + resume upload), `POST /screen` (runs pipeline → redirect to `/results`), `GET /results` (ranked table with Relative Match bars (Option C) + Raw + Similarity), `GET /candidate/<id>` (detail: matched/missing, 9-key breakdown, explanation). `app/app_streamlit.py` is archived Streamlit UI from Phase 10 (rollback path). Capture these to `outputs/screenshots/` for portfolio.
 
 ## 19. Limitations
 
@@ -238,7 +238,7 @@ pip install -r requirements.txt
 python -c "import pdfplumber; print(pdfplumber.__version__)"
 ```
 
-`requirements.txt`: `pdfplumber>=0.11.0`, `pdfminer.six>=20221105`, `pypdfium2>=4.0.0` (plus `reportlab` commented for fixtures).
+`requirements.txt`: `Flask>=3.0`, `pdfplumber>=0.11.0`, `pdfminer.six>=20221105`, `pypdfium2>=4.0.0` (plus `reportlab` commented for fixtures).
 
 ## 22. Usage
 
@@ -248,8 +248,9 @@ From repo root, venv activated:
 :: tests
 pytest -q
 
-:: dashboard
-streamlit run app/app.py
+:: dashboard (Flask)
+python app/app.py
+:: then open http://127.0.0.1:5000 in browser
 
 :: regenerate fixture PDFs (20 files to data/raw/pdfs/*.pdf)
 python notebooks\phase8_generate_fixtures.py
@@ -273,7 +274,14 @@ resume-screening-system/
 ├── README.md                       # this file (Phase 12)
 ├── requirements.txt
 ├── app/
-│   └── app.py
+│   ├── app.py                          # Flask (Phase 10b)
+│   ├── app_streamlit.py                # Archived Streamlit (Phase 10 rollback)
+│   ├── templates/
+│   │   ├── index.html
+│   │   ├── result.html
+│   │   └── candidate.html
+│   └── static/
+│       └── style.css
 ├── data/
 │   └── raw/
 │       ├── Resume.csv

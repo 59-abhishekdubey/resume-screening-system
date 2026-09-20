@@ -70,3 +70,13 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P9] Repo not git-initialized — file-modification checks done via timestamps + SHA256
 [P9] Score formula is MULTIPLICATIVE: final = skill_component × similarity_component.
      Top candidate currently scores 0.055 (5.5%). Display handling deferred to Phase 10.
+## Phase 10b — Flask Migration
+[P10b] Framework switched from Streamlit to Flask for portfolio impression.
+[P10b] app/app_streamlit.py archived (byte-copy of Phase 10 app.py) — rollback path.
+[P10b] Flask app is single-file, session-only (no DB, no auth, no extensions).
+[P10b] Routes: /, /screen (POST), /results, /candidate/<id>.
+[P10b] Calls pipeline.screen_resumes and pipeline.screen_from_pdf_folder only.
+[P10b] Relative Match display (raw / max) preserved from [P10] — LOCKED.
+[P10b] sample_jobs.json expanded to 11 roles (was: 5).
+[P10b] README sections 12, 18, 21, 22, 23 updated.
+[P10b] Zero changes to src/, tests/, evaluation/.

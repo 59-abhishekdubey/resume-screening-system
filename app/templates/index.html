@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI Candidate Screening</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>AI Candidate Screening</h1>
+    <p class="caption">Evidence-first ranking — matched/missing skills, similarity, and explainability from <code>src/pipeline.py</code>.</p>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">
+        {% for msg in messages %}
+          <div class="flash-msg">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% if error %}
+    <div class="flash"><div class="flash-msg">{{ error }}</div></div>
+  {% endif %}
+
+  <form action="{{ url_for('screen') }}" method="post" enctype="multipart/form-data">
+
+    <section>
+      <h2>1 — Job Input</h2>
+      <label for="job_role">Sample role</label>
+      <select name="job_role" id="job_role">
+        <option value="">-- Select a role --</option>
+        {% for role in roles %}
+          <option value="{{ role }}">{{ role }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="role_override" style="margin-top:0.5rem;">Optional role label (overrides pasted JD role)</label>
+      <input type="text" name="role_override" id="role_override" placeholder="e.g. ML Engineer — Custom">
+
+      <div style="margin-top:1rem;">
+        <label><input type="checkbox" id="toggle_jd"> Paste custom JD</label>
+      </div>
+      <div id="custom_jd_wrap" class="hidden">
+        <label for="custom_jd">Paste job description (free text)</label>
+        <textarea name="custom_jd" id="custom_jd" rows="8" placeholder="Paste the full JD here — Requirements / Preferred sections will be parsed if present, otherwise skills are extracted from the text."></textarea>
+      </div>
+    </section>
+
+    <section>
+      <h2>2 — Resume Input</h2>
+      <label for="pdfs">Upload resume PDFs (multi-file)</label>
+      <input type="file" name="pdfs" id="pdfs" multiple accept=".pdf">
+      <p class="caption">Fixture PDFs in <code>data/raw/pdfs/*.pdf</code> work here. Non-PDF uploads are rejected without crashing.</p>
+
+      <div style="margin-top:1rem;">
+        <label><input type="checkbox" id="toggle_resume"> Paste single resume text</label>
+      </div>
+      <div id="paste_wrap" class="hidden">
+        <label for="resume_text">Paste single resume text</label>
+        <textarea name="resume_text" id="resume_text" rows="8" placeholder="Paste raw resume text here for a quick single-candidate test."></textarea>
+        <label for="candidate_id">Candidate ID for pasted resume</label>
+        <input type="text" name="candidate_id" id="candidate_id" value="PASTE_001">
+      </div>
+    </section>
+
+    <section>
+      <button type="submit" class="btn-primary">Run Screening</button>
+    </section>
+  </form>
+
+  <footer>
+    <p class="caption">Screenshots for <code>outputs/screenshots/</code>: 1) Job input, 2) Resume upload/paste, 3) Ranked table, 4) Candidate detail.</p>
+  </footer>
+</div>
+<script>
+document.getElementById('toggle_jd').addEventListener('change', function(){document.getElementById('custom_jd_wrap').classList.toggle('hidden', !this.checked);});
+document.getElementById('toggle_resume').addEventListener('change', function(){document.getElementById('paste_wrap').classList.toggle('hidden', !this.checked);});
+</script>
+</body>
+</html>

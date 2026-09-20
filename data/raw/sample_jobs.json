@@ -5,32 +5,64 @@
     "required_skills": ["Python", "scikit-learn", "Docker", "Kubernetes", "SQL"],
     "optional_skills": ["AWS", "TensorFlow", "Natural Language Processing", "Spark"]
   },
-
   {
     "role": "UI/UX Designer",
     "description": "Placeholder job description for UI/UX Designer role. This will be populated with a realistic job description in the next phase.\n\nThe designer will work on creating intuitive user interfaces and exceptional user experiences for our web and mobile applications.",
     "required_skills": [],
     "optional_skills": []
   },
-
   {
     "role": "Data Scientist",
     "description": "Placeholder job description for Data Scientist role. This will be populated with a realistic job description in the next phase.\n\nThe data scientist will analyze complex data sets to drive business insights and develop predictive models.",
     "required_skills": [],
     "optional_skills": []
   },
-
   {
     "role": "DevOps Engineer",
     "description": "Placeholder job description for DevOps Engineer role. This will be populated with a realistic job description in the next phase.\n\nThe DevOps engineer will build and maintain CI/CD pipelines, infrastructure, and deployment automation.",
     "required_skills": [],
     "optional_skills": []
   },
-
   {
     "role": "Product Manager",
     "description": "Placeholder job description for Product Manager role. This will be populated with a realistic job description in the next phase.\n\nThe product manager will define product strategy, prioritize features, and coordinate cross-functional teams.",
     "required_skills": [],
     "optional_skills": []
+  },
+  {
+    "role": "Data Analyst",
+    "description": "We are looking for a detail-oriented Data Analyst to transform raw data into actionable insights that drive business decisions. The ideal candidate will collect, clean, and analyze large datasets from multiple sources, build interactive dashboards, and communicate findings to stakeholders across the organization. You will write complex SQL queries, develop reports in Tableau and Power BI, and perform statistical analysis using Python and Excel. Responsibilities include identifying trends, forecasting key metrics, ensuring data quality and governance, and collaborating with product and marketing teams to define KPIs. The role requires strong analytical thinking, attention to detail, and the ability to translate technical findings into clear business recommendations. You will also automate reporting workflows, maintain data pipelines, and support ad-hoc analysis requests from leadership.\n\nRequirements:\n- Proficiency in SQL for querying relational databases and optimizing queries\n- Experience with Python for data analysis using pandas and NumPy\n- Hands-on expertise with Microsoft Excel including pivot tables and advanced formulas\n- Experience building dashboards with Tableau or Power BI\n- Excellent communication and data storytelling skills\n\nPreferred Skills:\n- Knowledge of statistics and A/B testing methodologies\n- Experience with ETL tools or data warehousing concepts\n- Familiarity with R programming for statistical analysis",
+    "required_skills": ["SQL", "Python", "Excel", "Tableau", "Power BI"],
+    "optional_skills": ["R", "ETL", "Statistics"]
+  },
+  {
+    "role": "Python Developer",
+    "description": "We are seeking a skilled Python Developer to build and maintain scalable backend services and automation tools. You will design clean, efficient, and reusable code, develop RESTful APIs using frameworks such as Django or Flask, and integrate with databases and third-party services. The role involves writing unit and integration tests, optimizing application performance, and collaborating with frontend developers and product managers to deliver new features. You should be comfortable working with relational databases like PostgreSQL or MySQL, version control with Git, and containerization with Docker. Experience with cloud platforms and CI/CD pipelines is highly valued. The ideal candidate writes well-documented code, follows best practices, and enjoys solving complex engineering problems in an agile environment. You will also participate in code reviews, troubleshoot production issues, and continuously improve our codebase.\n\nRequirements:\n- Strong proficiency in Python and object-oriented programming\n- Experience with Django or Flask web frameworks\n- Knowledge of REST API design and development\n- Experience with SQL and relational databases such as PostgreSQL\n- Proficiency with Git version control\n\nPreferred Skills:\n- Experience with Docker and container orchestration\n- Familiarity with AWS or other cloud platforms\n- Knowledge of unit testing with pytest",
+    "required_skills": ["Python", "Django", "REST API", "SQL", "Git"],
+    "optional_skills": ["Docker", "AWS", "pytest"]
+  },
+  {
+    "role": "Backend Engineer",
+    "description": "We are hiring a Backend Engineer to architect and implement high-performance server-side applications that power our platform. You will design scalable microservices, develop robust APIs, and ensure data integrity across distributed systems. Responsibilities include building services in Python, Java, or Node.js, working with both SQL and NoSQL databases, and implementing caching with Redis or Memcached. You will collaborate with DevOps to deploy services using Docker and Kubernetes, monitor system health, and optimize for latency and throughput. The ideal candidate has a strong understanding of system design, database modeling, authentication, and security best practices. You will write clean, testable code, conduct code reviews, and mentor junior engineers. Experience with message queues, event-driven architecture, and cloud infrastructure is a plus. This role offers the opportunity to solve challenging scalability problems and directly impact product reliability.\n\nRequirements:\n- Proficiency in at least one backend language such as Python, Java, or Node.js\n- Experience designing and building REST APIs and microservices\n- Strong knowledge of SQL and experience with NoSQL databases\n- Experience with Docker and containerized deployments\n- Understanding of system design and distributed systems concepts\n\nPreferred Skills:\n- Experience with Kubernetes for orchestration\n- Knowledge of Redis for caching\n- Familiarity with AWS cloud services",
+    "required_skills": ["Python", "REST API", "SQL", "NoSQL", "Docker"],
+    "optional_skills": ["Kubernetes", "Redis", "AWS"]
+  },
+  {
+    "role": "Frontend Developer",
+    "description": "We are searching for a creative Frontend Developer to build responsive, high-quality user interfaces for our web applications. You will translate UI/UX designs into clean, efficient code using HTML, CSS, and JavaScript, and develop interactive features with modern frameworks such as React or Angular. Responsibilities include optimizing applications for speed and scalability, ensuring cross-browser compatibility, and collaborating closely with designers and backend engineers to integrate APIs. You should have a keen eye for detail, a strong understanding of web performance, and experience with state management, component-based architecture, and testing frameworks like Jest. Knowledge of TypeScript, version control with Git, and build tools such as Webpack or Vite is expected. The ideal candidate stays current with frontend trends, writes maintainable code, and is passionate about delivering polished, accessible user experiences that delight customers across devices.\n\nRequirements:\n- Proficiency in HTML, CSS, and JavaScript ES6+\n- Experience with React or Angular frameworks\n- Knowledge of responsive design and cross-browser compatibility\n- Experience consuming REST APIs and handling asynchronous data\n- Familiarity with Git and collaborative development workflows\n\nPreferred Skills:\n- Experience with TypeScript\n- Knowledge of Jest for frontend testing\n- Understanding of Webpack or Vite build tools",
+    "required_skills": ["HTML", "CSS", "JavaScript", "React", "Git"],
+    "optional_skills": ["TypeScript", "Angular", "Jest"]
+  },
+  {
+    "role": "Full Stack Developer",
+    "description": "We are looking for a versatile Full Stack Developer who can work across the entire technology stack to deliver end-to-end features. You will build responsive frontend interfaces using React, develop robust backend services with Python and Django or Node.js, and manage databases including PostgreSQL and MongoDB. Responsibilities include designing REST APIs, implementing authentication and authorization, writing automated tests, and deploying applications with Docker. You will collaborate with product managers, designers, and other engineers in an agile environment, participate in architectural decisions, and ensure code quality through reviews and best practices. The ideal candidate is comfortable context-switching between frontend and backend, has strong problem-solving skills, and enjoys owning features from conception to production. Experience with cloud platforms such as AWS, CI/CD pipelines, and performance optimization is highly desirable for scaling our product to millions of users.\n\nRequirements:\n- Proficiency in JavaScript and Python programming languages\n- Experience with React for frontend development\n- Knowledge of Node.js or Django for backend services\n- Strong understanding of SQL and database design\n- Experience with Git and Docker for development and deployment\n\nPreferred Skills:\n- Familiarity with AWS cloud infrastructure\n- Experience with MongoDB or other NoSQL databases\n- Knowledge of Kubernetes for scaling applications",
+    "required_skills": ["JavaScript", "Python", "React", "SQL", "Git"],
+    "optional_skills": ["Node.js", "MongoDB", "AWS"]
+  },
+  {
+    "role": "Business Analyst",
+    "description": "We are seeking an analytical Business Analyst to bridge the gap between business needs and technical solutions. You will gather and document requirements, analyze business processes, and translate stakeholder needs into clear functional specifications for development teams. Responsibilities include conducting market research, creating process flow diagrams, defining KPIs, and supporting data-driven decision making with SQL and Excel analysis. You will facilitate workshops, prepare business case documentation, and collaborate with product, engineering, and operations teams to ensure successful project delivery. The role requires strong communication, critical thinking, and the ability to create wireframes or prototypes using tools like Figma or Balsamiq. Experience with Agile methodologies, JIRA, and tools such as Tableau for reporting is preferred. The ideal candidate is detail-oriented, proactive, and skilled at identifying opportunities for process improvement and operational efficiency across the organization.\n\nRequirements:\n- Experience gathering and documenting business requirements\n- Proficiency in SQL for data analysis and reporting\n- Advanced skills in Microsoft Excel for modeling and analysis\n- Knowledge of Agile methodologies and JIRA\n- Strong communication and stakeholder management skills\n\nPreferred Skills:\n- Experience with Tableau for business reporting\n- Familiarity with Figma for wireframing\n- Understanding of process modeling techniques",
+    "required_skills": ["SQL", "Excel", "Agile", "JIRA", "Business Analysis"],
+    "optional_skills": ["Tableau", "Figma", "Requirements Gathering"]
   }
 ]

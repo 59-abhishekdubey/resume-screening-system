@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Results — AI Candidate Screening</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Screening Results</h1>
+    <p class="caption">Role: <strong>{{ job_role }}</strong> — {{ results|length }} candidate(s)</p>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="flash">
+        {% for msg in messages %}
+          <div class="flash-msg">{{ msg }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th>
+        <th>Candidate ID</th>
+        <th>Relative Match</th>
+        <th>Raw Score</th>
+        <th>Similarity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+        {% set rel = (r.overall_score / max_score * 100) if max_score > 0 else 0 %}
+        <tr>
+          <td>{{ r.rank }}</td>
+          <td><a href="{{ url_for('candidate', candidate_id=r.candidate_id) }}">{{ r.candidate_id }}</a></td>
+          <td>
+            <div class="bar-track"><div class="bar" style="width: {{ rel }}%"></div></div>
+            <span class="bar-label">{{ '%.2f'|format(r.overall_score / max_score if max_score>0 else 0) }}</span>
+          </td>
+          <td>{{ '%.4f'|format(r.overall_score) }}</td>
+          <td>{{ '%.4f'|format(r.similarity) }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <p class="caption">Max raw score: {{ '%.4f'|format(max_score) }} — bars = raw / max</p>
+
+  <p><a href="{{ url_for('index') }}">Run another screening</a></p>
+</div>
+</body>
+</html>
