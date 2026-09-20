@@ -96,3 +96,10 @@ All self-checks pass, no forbidden imports, and the files only contain presentat
 [P10d] Empty missing_skills renders no line (no "Missing: none" noise).
 [P10d] Zero changes to src/, tests/, evaluation/.
 [P10d] This is the final UI change — project ships after this.
+
+## Phase 12b — README Alignment + Simplification
+[P12b] README updated to match current UI (Match Summary, Skill Coverage, JD Similarity, Missing Skills — no raw score, no relative bars).
+[P12b] 23-section structure preserved.
+[P12b] Sections 5 and 6 kept verbatim (numeric ground truth from [P1]).
+[P12b] New limitation added: composite score intentionally hidden from UI.
+[P12b] Zero changes to src/, tests/, evaluation/, app/.
